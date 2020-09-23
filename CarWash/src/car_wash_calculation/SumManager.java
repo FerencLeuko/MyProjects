@@ -1,16 +1,21 @@
-package car_wash;
+package car_wash_calculation;
+
+import car_wash_data.Materials;
+import car_wash_data.Services;
+import car_wash_main.Main;
+import car_wash_main.Printer;
+import car_wash_main.UserInput;
 
 public class SumManager {
 
 	private Materials materials = new Materials();
 	private Services services = new Services();
 	private UserInput input = new UserInput();
-	private FileManager file = new FileManager();
 	private Printer printer = new Printer();
+	private static final int SUM_LIMIT = 50;
 
-	public static void sum() {
-		SumManager sum = new SumManager();
-		sum.calculateSum();
+	public void sum() {
+		calculateSum();
 	}
 
 	private void calculateSum() {
@@ -19,7 +24,7 @@ public class SumManager {
 			addFiles(num);
 			printer.printAllConsumption(materials, services);
 			if (askSave()) {
-				file.saveAs(materials, services);
+				Main.file.saveAs(materials, services);
 			} else {
 				printer.print(String.format("Az összesítést nem mentette a program. Folytatás.%n"));
 			}
@@ -33,27 +38,27 @@ public class SumManager {
 	}
 
 	private int askForNumFiles() {
-		return input.askInputIntWithLimits("Hány mentett adatfile-t szeretne összesíteni: ", 25);
+		return input.askInputIntWithLimits("Hány mentett adatfile-t szeretne összesíteni: ", SUM_LIMIT);
 	}
 
 	private void addFiles(int num) {
 		String lastSavedNum = "_default";
 		try {
-			lastSavedNum = file.loadLastSavedNumber();
+			lastSavedNum = Main.file.loadLastSavedNumber();
 		} catch (Exception e) {
 		}
-		file.loadMaterialPrices(materials, lastSavedNum);
-		file.loadMaterialUnits(materials, lastSavedNum);
-		file.loadServiceRatios(services, lastSavedNum);
+		Main.file.loadMaterialPrices(materials, lastSavedNum);
+		Main.file.loadMaterialUnits(materials, lastSavedNum);
+		Main.file.loadServiceRatios(services, lastSavedNum);
 		for (int i = 0; i < num; i++) {
 			int fileNum = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni: ");
 			String fileNumber = "" + fileNum;
-			double[] addMQ = materials.getQuant();
+			double[] addMQ = materials.getQuants();
 			int[] addSerS = services.getQSmall();
 			int[] addSerL = services.getQLarge();
-			file.loadMaterialQuants(materials, fileNumber);
-			file.loadServiceQSmall(services, fileNumber);
-			file.loadServiceQLarge(services, fileNumber);
+			Main.file.loadMaterialQuants(materials, fileNumber);
+			Main.file.loadServiceQSmall(services, fileNumber);
+			Main.file.loadServiceQLarge(services, fileNumber);
 			for (int j = 0; j < Materials.getMaterialNames().length; j++) {
 				materials.setQuant(materials.getQuant(j) + addMQ[j], j);
 				services.setQSmall(services.getQSmall(j) + addSerS[j], j);

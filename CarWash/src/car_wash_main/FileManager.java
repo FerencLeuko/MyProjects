@@ -1,4 +1,4 @@
-package car_wash;
+package car_wash_main;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,14 +7,27 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-class FileManager {
+import car_wash_data.CurrentDate;
+import car_wash_data.Materials;
+import car_wash_data.Services;
+
+public class FileManager {
 
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
-	private LinkedList<Integer> workSessionList = new LinkedList<Integer>();
+	private static LinkedList<Integer> workSessionList = new LinkedList<Integer>();
+	
+	private FileManager() {
+	}
+	
+	private static final FileManager FILE = new FileManager();
+	
+	static FileManager getFileManager() {
+		return FILE;
+	}
 
-	void initWorkSessionList() {
+	public void initWorkSessionList() {
 		try {
 			int[] fileNumbers = readDataFromFileInt("workSessionList");
 			for (int fileNumber : fileNumbers) {
@@ -33,7 +46,7 @@ class FileManager {
 		saveDataToFileInt("workSessionList", fileNumbersArray);
 	}
 
-	void loadAutoSave(Materials materials, Services services) {
+	public void loadAutoSave(Materials materials, Services services) {
 		String lastSavedNum = "";
 		try {
 			lastSavedNum = readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
@@ -45,14 +58,14 @@ class FileManager {
 		}
 	}
 
-	void loadAs(Materials materials, Services services) {
+	public void loadAs(Materials materials, Services services) {
 		int lastSavedNum = Integer.MIN_VALUE;
 		try {
 			lastSavedNum = readDataFromFileInt("lastSavedNum")[0];
 		} catch (Exception e) {
 			System.out.println("Nem volt még mentett sorzsám.");
 		}
-		if (lastSavedNum != -Integer.MIN_VALUE) {
+		if (lastSavedNum != Integer.MIN_VALUE) {
 			System.out.printf("A legutóbbi aktív munkamenet sorszáma: %d.%n", lastSavedNum);
 		}
 		int fileNumber = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni (lista:0-val): ");
@@ -83,11 +96,10 @@ class FileManager {
 		}
 	}
 	
-	void startNewWorkSession(Materials materials, Services services) {
+	public void startNewWorkSession(Materials materials, Services services) {
 		try {
-			materials.setQuant(readDataFromFileDouble("MaterialQ_default"));
-			services.setQSmall(readDataFromFileInt("ServiceQSmall_default"));
-			services.setQLarge(readDataFromFileInt("ServiceQLarge_default"));
+			loadDefaultQuants(materials);
+			loadDefaultServicesQ(services);
 			printer.print(String.format("Új munkamenet indult.%n"));
 			int fileNumber = input.askInputInt("Milyen sorszámmal mentsem a munkamenetet: ");
 			saveAll(materials, services, "" + fileNumber);
@@ -101,25 +113,48 @@ class FileManager {
 	}
 
 
-	void loadDefaultRatios(Services services) {
+	public void loadDefaultRatios(Services services) {
 		try {
 			services.setsLRatio(readDataFromFileDouble("ServiceRatios_default"));
-			printer.print(String.format("A beépített arányok (%.2f) visszaállítva.%n", services.getsLRatio()[0]));
 		} catch (Exception e) {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
 
-	void loadDefaultPrices(Materials materials) {
+	public void loadDefaultPrices(Materials materials) {
 		try {
 			materials.setPrices(readDataFromFileInt("MaterialP_default"));
-			printer.printPrices(materials.getPrices());
+		} catch (Exception e) {
+			printer.print("Nem sikerült a betöltés.");
+		}
+	}
+	
+	public void loadDefaultUnits(Materials materials) {
+		try {
+			materials.setUnits(readDataFromFileInt("MaterialUnits_default"));
+		} catch (Exception e) {
+			printer.print("Nem sikerült a betöltés.");
+		}
+	}
+	
+	public void loadDefaultQuants(Materials materials) {
+		try {
+			materials.setQuants(readDataFromFileDouble("MaterialQ_default"));
+		} catch (Exception e) {
+			printer.print("Nem sikerült a betöltés.");
+		}
+	}
+	
+	public void loadDefaultServicesQ(Services services) {
+		try {
+			services.setQSmall(readDataFromFileInt("ServiceQSmall_default"));
+			services.setQLarge(readDataFromFileInt("ServiceQLarge_default"));
 		} catch (Exception e) {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
 
-	void autoSave(Materials materials, Services services) {
+	public void autoSave(Materials materials, Services services) {
 		String lastSavedNum = "";
 		try {
 			lastSavedNum = readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
@@ -134,7 +169,7 @@ class FileManager {
 		}
 	}
 
-	void saveAs(Materials materials, Services services) {
+	public void saveAs(Materials materials, Services services) {
 		int lastSavedNum = Integer.MIN_VALUE;
 		String lastSavedDate = "";
 		try {
@@ -159,31 +194,31 @@ class FileManager {
 		}
 	}
 
-	void loadServiceRatios(Services services, String fileNumber) {
+	public void loadServiceRatios(Services services, String fileNumber) {
 		services.setsLRatio(readDataFromFileDouble("ServiceRatios" + fileNumber));
 	}
 
-	void loadServiceQLarge(Services services, String fileNumber) {
+	public void loadServiceQLarge(Services services, String fileNumber) {
 		services.setQLarge(readDataFromFileInt("ServiceQLarge" + fileNumber));
 	}
 
-	void loadServiceQSmall(Services services, String fileNumber) {
+	public void loadServiceQSmall(Services services, String fileNumber) {
 		services.setQSmall(readDataFromFileInt("ServiceQSmall" + fileNumber));
 	}
 
-	void loadMaterialQuants(Materials materials, String fileNumber) {
-		materials.setQuant(readDataFromFileDouble("MaterialQ" + fileNumber));
+	public void loadMaterialQuants(Materials materials, String fileNumber) {
+		materials.setQuants(readDataFromFileDouble("MaterialQ" + fileNumber));
 	}
 
-	void loadMaterialUnits(Materials materials, String fileNumber) {
+	public void loadMaterialUnits(Materials materials, String fileNumber) {
 		materials.setUnits(readDataFromFileInt("MaterialUnits" + fileNumber));
 	}
 
-	void loadMaterialPrices(Materials materials, String fileNumber) {
+	public void loadMaterialPrices(Materials materials, String fileNumber) {
 		materials.setPrices(readDataFromFileInt("MaterialP" + fileNumber));
 	}
 	
-	String loadLastSavedNumber() {
+	public String loadLastSavedNumber() {
 		return readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
 	}
 
@@ -199,7 +234,7 @@ class FileManager {
 	private void saveAll(Materials materials, Services services, String fileNumber) {
 		saveDataToFileInt("MaterialP" + fileNumber, materials.getPrices());
 		saveDataToFileInt("MaterialUnits" + fileNumber, materials.getUnits());
-		saveDataToFileDouble("MaterialQ" + fileNumber, materials.getQuant());
+		saveDataToFileDouble("MaterialQ" + fileNumber, materials.getQuants());
 		saveDataToFileInt("ServiceQSmall" + fileNumber, services.getQSmall());
 		saveDataToFileInt("ServiceQLarge" + fileNumber, services.getQLarge());
 		saveDataToFileDouble("ServiceRatios" + fileNumber, services.getsLRatio());

@@ -1,0 +1,20 @@
+package car_wash_menu;
+
+import car_wash_main.Menu;
+import car_wash_main.MenuSelection;
+
+public class MenuFactory implements MenuSelection {
+
+	private final Menu[] menuSelection = { new ServiceAddition(), new MaterialOrder(), new StorageUpdate(), new PrintConsumption(),
+			new PrintAllConsumption(), new SaveAs(), new LoadAs(), new NewSession(), new Extras() };
+
+	private final Menu[] extraSelection = { new Ratio(), new Sum(), new ChangePrice(), new ChangeUnit(), new DefaultPrice(), new DefaultRatio() };
+
+	public Menu[] getMenuSelection() {
+		return menuSelection;
+	}
+	
+	public Menu[] getExtraSelection() {
+		return extraSelection;
+	}
+}

@@ -1,14 +1,14 @@
-package car_wash;
+package car_wash_main;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class UserInput {
+public class UserInput {
 
-	static final Scanner SCANNER = new Scanner(System.in);
-	Printer printer = new Printer();
+	public static final Scanner SCANNER = new Scanner(System.in);
+	private Printer printer = new Printer();
 
-	int askInputInt(String text) {
+	public int askInputInt(String text) {
 		int input;
 		while (true) {
 			try {
@@ -24,7 +24,7 @@ class UserInput {
 		}
 	}
 
-	int askInputIntWithLimits(String text, int max) {
+	public int askInputIntWithLimits(String text, int max) {
 		int input = 0;
 		do {
 			try {
@@ -40,7 +40,7 @@ class UserInput {
 		return input;
 	}
 	
-	int askInputWithExitAndLimits(String text, int max) {
+	public int askInputWithExitAndLimits(String text, int max) {
 		int input = 0;
 		do {
 			try {
@@ -59,7 +59,7 @@ class UserInput {
 		return input;
 	}
 
-	double askInputDouble(String text) {
+	public double askInputDouble(String text) {
 		double input;
 		while (true) {
 			try {

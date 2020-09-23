@@ -1,22 +1,25 @@
-package car_wash;
+package car_wash_data;
 
-
-class Data {
+public class AllData {
 	
 	private Materials materials;
 	private Services services;
 	
-	Data (Materials materials, Services services){
+	public AllData (Materials materials, Services services){
 		this.materials = materials;
 		this.services = services;
 	}
 	
-	Materials getMaterials() {
+	public Materials getMaterials() {
 		return materials;
 	}
 	
-	Services getServices() {
+	public Services getServices() {
 		return services;
+	}
+	
+	public String dateString() {
+		return new CurrentDate().provideDateString();
 	}
 	
 }

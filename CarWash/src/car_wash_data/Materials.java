@@ -1,16 +1,20 @@
-package car_wash;
+package car_wash_data;
 
-class Materials {
+import car_wash_main.Main;
+import car_wash_main.Printer;
+import car_wash_main.UserInput;
 
-	private static final String[] MATERIAL_NAMES = new String[8];
-	private double[] quant = new double[8];
-	private int[] prices = new int[8];
-	private int[] units = new int[8];
+public class Materials {
+
+	private static final int NUM_MATERIALS = 8;
+	private static final String[] MATERIAL_NAMES = new String[NUM_MATERIALS];
+	private double[] quants = new double[NUM_MATERIALS];
+	private int[] prices = new int[NUM_MATERIALS];
+	private int[] units = new int[NUM_MATERIALS];
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 
 	static {
-
 		MATERIAL_NAMES[0] = "3M polírpaszta";
 		MATERIAL_NAMES[1] = "Nasiol Protect";
 		MATERIAL_NAMES[2] = "VMD spray";
@@ -19,34 +23,15 @@ class Materials {
 		MATERIAL_NAMES[5] = "Hill Vital";
 		MATERIAL_NAMES[6] = "Prevent";
 		MATERIAL_NAMES[7] = "Motor cleaner";
-
 	}
 
 	{
-		prices[0] = 13300;
-		prices[1] = 24000 * 20;
-		prices[2] = 1599 * 2;
-		prices[3] = 949 / 3 * 4;
-		prices[4] = 2030 / 5;
-		prices[5] = 2290 * 5;
-		prices[6] = 1999 / 375 * 1000;
-		prices[7] = 1220;
-
-		units[0] = 1000;
-		units[1] = 50;
-		units[2] = 500;
-		units[3] = 750;
-		units[4] = 5000;
-		units[5] = 200;
-		units[6] = 375;
-		units[7] = 1000;
-
-		for (int i = 0; i < MATERIAL_NAMES.length; i++) {
-			quant[i] = 0;
-		}
+		Main.file.loadDefaultPrices(this);
+		Main.file.loadDefaultUnits(this);
+		Main.file.loadDefaultQuants(this);
 	}
 
-	void addMaterialOrdered() {
+	public void addMaterialOrdered() {
 		printer.print(String.format("Anyagrendelés hozzáadása:%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
@@ -54,24 +39,24 @@ class Materials {
 		if (choice != Main.EXIT_VALUE) {
 			choice--;
 			double change = input.askInputDouble("A rendelt mennyiség literben: ");
-			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[choice], new double[] { quant[choice], quant[choice] + change });
-			quant[choice] += change;
+			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[choice], new double[] { quants[choice], quants[choice] + change });
+			quants[choice] += change;
 		}
 	}
 
-	void updateStorage() {
+	public void updateStorage() {
 		printer.print(String.format("Készletváltozás rögzítése:%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
 		if (choice != Main.EXIT_VALUE) {
 			double change = input.askInputDouble("A készletváltozás literben (készletcsökkenés esetén negatív): ");
-			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[--choice], new double[] { quant[choice], quant[choice] - change });
-			quant[choice] -= change;
+			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[--choice], new double[] { quants[choice], quants[choice] - change });
+			quants[choice] -= change;
 		}
 	}
 
-	void changePrice() {
+	public void changePrice() {
 		printer.print(String.format("Anyagár módosítása (kiszerelés módosítása):%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
@@ -83,7 +68,7 @@ class Materials {
 		}
 	}
 
-	void changeUnits() {
+	public void changeUnits() {
 		printer.print(String.format("Anyagok kiszerelésének módosítása: %n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
@@ -95,51 +80,51 @@ class Materials {
 		}
 	}
 
-	String addUnit(int i) {
+	public String addUnit(int i) {
 		return units[i] >= 1000 ? "" + units[i] / 1000 + " liter." : "" + units[i] + " ml.";
 	}
 
-	static String[] getMaterialNames() {
+	public static String[] getMaterialNames() {
 		return MATERIAL_NAMES;
 	}
 
-	double[] getQuant() {
-		return quant;
+	public double[] getQuants() {
+		return quants;
 	}
 
-	double getQuant(int index) {
-		return quant[index];
+	public double getQuant(int index) {
+		return quants[index];
 	}
 
-	void setQuant(double[] quant) {
-		this.quant = quant;
+	public void setQuants(double[] quant) {
+		this.quants = quant;
 	}
 
-	void setQuant(double quant, int index) {
-		this.quant[index] = quant;
+	public void setQuant(double quant, int index) {
+		this.quants[index] = quant;
 	}
 
-	int[] getPrices() {
+	public int[] getPrices() {
 		return prices;
 	}
 
-	int getPrices(int index) {
+	public int getPrices(int index) {
 		return prices[index];
 	}
 
-	void setPrices(int[] prices) {
+	public void setPrices(int[] prices) {
 		this.prices = prices;
 	}
 
-	void setPrices(int price, int index) {
+	public void setPrices(int price, int index) {
 		this.prices[index] = price;
 	}
 
-	int[] getUnits() {
+	public int[] getUnits() {
 		return units;
 	}
 
-	void setUnits(int[] units) {
+	public void setUnits(int[] units) {
 		this.units = units;
 	}
 

@@ -1,8 +1,13 @@
-package car_wash;
+package car_wash_calculation;
 
-class RatiosManager {
+import car_wash_data.Materials;
+import car_wash_data.Services;
+import car_wash_main.Main;
+import car_wash_main.Printer;
+import car_wash_main.UserInput;
 
-	private FileManager file = new FileManager();
+public class RatiosManager {
+
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 	private Materials materials = new Materials();
@@ -16,7 +21,7 @@ class RatiosManager {
 	private double material2;
 	private int choice;
 
-	void calculateRatio(Services services) {
+	public void calculateRatio(Services services) {
 		try {
 			printer.print(String.format("Kis és nagy autó anyagfelhasználás pontosítása számításokkal.%n"));
 			printer.printNames(Materials.getMaterialNames());
@@ -62,9 +67,9 @@ class RatiosManager {
 	private void askFirstData() {
 		int fileNum = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni: ");
 		String fileNumber = "" + fileNum;
-		file.loadMaterialQuants(materials, fileNumber);
-		file.loadServiceQSmall(services, fileNumber);
-		file.loadServiceQLarge(services, fileNumber);
+		Main.file.loadMaterialQuants(materials, fileNumber);
+		Main.file.loadServiceQSmall(services, fileNumber);
+		Main.file.loadServiceQLarge(services, fileNumber);
 		small1 = services.getQSmall(choice);
 		large1 = services.getQLarge(choice);
 		material1 = materials.getQuant(choice);
@@ -73,9 +78,9 @@ class RatiosManager {
 	private void askSecondData() {
 		int fileNum = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni: ");
 		String fileNumber = "" + fileNum;
-		file.loadMaterialQuants(materials, fileNumber);
-		file.loadServiceQSmall(services, fileNumber);
-		file.loadServiceQLarge(services, fileNumber);
+		Main.file.loadMaterialQuants(materials, fileNumber);
+		Main.file.loadServiceQSmall(services, fileNumber);
+		Main.file.loadServiceQLarge(services, fileNumber);
 		small2 = services.getQSmall(choice);
 		large2 = services.getQLarge(choice);
 		material2 = materials.getQuant(choice);

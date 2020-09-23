@@ -1,11 +1,17 @@
-package car_wash;
+package car_wash_data;
 
-class Services {
+import car_wash_main.Main;
+import car_wash_main.Printer;
+import car_wash_main.UserInput;
 
-	private static final String[] SERVICE_NAMES = new String[8];
-	double[] sLRatio = new double[8];
-	private int[] QSmall = new int[8];
-	private int[] QLarge = new int[8];
+public class Services {
+
+	private static final int NUM_SERVICES = 8;
+	private static final double DEFAULT_RATIO = 2d;
+	private static final String[] SERVICE_NAMES = new String[NUM_SERVICES];
+	double[] sLRatio = new double[NUM_SERVICES];
+	private int[] QSmall = new int[NUM_SERVICES];
+	private int[] QLarge = new int[NUM_SERVICES];
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 
@@ -22,22 +28,15 @@ class Services {
 	}
 
 	{
-		sLRatio[0] = 2.0;
-		sLRatio[1] = 2.0;
-		sLRatio[2] = 2.0;
-		sLRatio[3] = 2.0;
-		sLRatio[4] = 2.0;
-		sLRatio[5] = 2.0;
-		sLRatio[6] = 2.0;
-		sLRatio[7] = 2.0;
-
-		for (int i = 0; i < SERVICE_NAMES.length; i++) {
-			QSmall[i] = 0;
-			QLarge[i] = 0;
+		for (int i = 0; i < NUM_SERVICES; i++) {
+		sLRatio[i] = DEFAULT_RATIO;
+		QSmall[i] = 0;
+		QLarge[i] = 0;
 		}
+
 	}
 
-	void addServiceSold() {
+	public void addServiceSold() {
 		printer.print(String.format("Eladott szolgáltatások hozzáadása:%n"));
 		printer.printNames(SERVICE_NAMES);
 		printer.print(String.format("* Mégsem%n"));
@@ -58,51 +57,51 @@ class Services {
 		}
 	}
 
-	static String[] getServiceNames() {
+	public static String[] getServiceNames() {
 		return SERVICE_NAMES;
 	}
 
-	int[] getQSmall() {
+	public int[] getQSmall() {
 		return QSmall;
 	}
 
-	int getQSmall(int index) {
+	public int getQSmall(int index) {
 		return QSmall[index];
 	}
 
-	void setQSmall(int[] serviceQSmall) {
+	public void setQSmall(int[] serviceQSmall) {
 		this.QSmall = serviceQSmall;
 	}
 
-	void setQSmall(int serviceQSmall, int index) {
+	public void setQSmall(int serviceQSmall, int index) {
 		this.QSmall[index] = serviceQSmall;
 	}
 
-	int[] getQLarge() {
+	public int[] getQLarge() {
 		return QLarge;
 	}
 
-	int getQLarge(int index) {
+	public int getQLarge(int index) {
 		return QLarge[index];
 	}
 
-	void setQLarge(int[] serviceQLarge) {
+	public void setQLarge(int[] serviceQLarge) {
 		this.QLarge = serviceQLarge;
 	}
 
-	void setQLarge(int serviceQLarge, int index) {
+	public void setQLarge(int serviceQLarge, int index) {
 		this.QLarge[index] = serviceQLarge;
 	}
 
-	double[] getsLRatio() {
+	public double[] getsLRatio() {
 		return sLRatio;
 	}
 
-	void setsLRatio(double[] sLRatio) {
+	public void setsLRatio(double[] sLRatio) {
 		this.sLRatio = sLRatio;
 	}
 
-	void setsLRatio(double sLRatio, int index) {
+	public void setsLRatio(double sLRatio, int index) {
 		this.sLRatio[index] = sLRatio;
 	}
 
