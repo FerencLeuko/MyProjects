@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import car_wash_data.CurrentDate;
 import car_wash_data.Materials;
@@ -16,7 +17,7 @@ public class FileManager {
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
-	private static LinkedList<Integer> workSessionList = new LinkedList<Integer>();
+	private static List<Integer> workSessionList = new LinkedList<Integer>();
 	
 	private FileManager() {
 	}

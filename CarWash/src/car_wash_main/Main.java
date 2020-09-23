@@ -40,7 +40,7 @@ public class Main {
 				if (choice == EXIT_VALUE) {
 					break;
 				}
-				selectMenuAction(choice);	
+				selectMenuAction(choice);
 				file.autoSave(materials, services);
 			} catch (Exception e) {
 				System.out.print("Hiba történt!");
@@ -57,7 +57,7 @@ public class Main {
 		file.loadAutoSave(materials, services);
 		file.initWorkSessionList();
 	}
-	
+
 	private void selectMenuAction(int choice) {
 		if (menuSelection[--choice].getName().equals("Extrák")) {
 			selectExtras();
