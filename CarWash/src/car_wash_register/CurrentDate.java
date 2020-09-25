@@ -1,9 +1,11 @@
-package car_wash_data;
+package car_wash_register;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CurrentDate {
+import car_wash_main.Register;
+
+public class CurrentDate implements Register {
 
 	public Date getCurrentDate() {
 		return new Date();

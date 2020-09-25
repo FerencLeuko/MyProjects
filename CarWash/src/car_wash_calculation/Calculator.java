@@ -1,8 +1,8 @@
 package car_wash_calculation;
 
-import car_wash_data.AllData;
-import car_wash_data.Materials;
-import car_wash_data.Services;
+import car_wash_register.AllData;
+import car_wash_register.Materials;
+import car_wash_register.Services;
 
 public class Calculator {
 

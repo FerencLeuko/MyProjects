@@ -1,6 +1,8 @@
-package car_wash_data;
+package car_wash_register;
 
-public class AllData {
+import car_wash_main.Register;
+
+public class AllData implements Register {
 	
 	private Materials materials;
 	private Services services;

@@ -1,15 +1,15 @@
-package car_wash_data;
+package car_wash_register;
 
-import car_wash_main.Main;
+import car_wash_main.Register;
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
 
-public class Services {
+public class Services implements Register {
 
 	private static final int NUM_SERVICES = 8;
 	private static final double DEFAULT_RATIO = 2d;
 	private static final String[] SERVICE_NAMES = new String[NUM_SERVICES];
-	double[] sLRatio = new double[NUM_SERVICES];
+	private double[] sLRatio = new double[NUM_SERVICES];
 	private int[] QSmall = new int[NUM_SERVICES];
 	private int[] QLarge = new int[NUM_SERVICES];
 	private UserInput input = new UserInput();
@@ -41,15 +41,15 @@ public class Services {
 		printer.printNames(SERVICE_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("A szolgáltatás: ", SERVICE_NAMES.length);
-		if (choice != Main.EXIT_VALUE) {
+		if (choice != EXIT_VALUE) {
 			choice--;
 			int change = input.askInputInt("Az eladott szolgáltatás mennyisége: ");
 			int car = input.askInputIntWithLimits("1. kis autó vagy 2. nagy autó : ", 2);
 			if (car == 2) {
-				printer.printChangeInt(SERVICE_NAMES[choice] + " nagy autóra", new int[] { QLarge[choice], QLarge[choice] + change });
+				printer.printChange(SERVICE_NAMES[choice] + " nagy autóra", new Number[] { QLarge[choice], QLarge[choice] + change });
 				QLarge[choice] += change;
 			} else if (car == 1) {
-				printer.printChangeInt(SERVICE_NAMES[choice] + " kis autóra", new int[] { QSmall[choice], QSmall[choice] + change });
+				printer.printChange(SERVICE_NAMES[choice] + " kis autóra", new Number[] { QSmall[choice], QSmall[choice] + change });
 				QSmall[choice] += change;
 			} else {
 				printer.printUnsuccessful();

@@ -1,10 +1,11 @@
-package car_wash_data;
+package car_wash_register;
 
-import car_wash_main.Main;
+import car_wash_main.Register;
+import car_wash_main.FileManager;
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
 
-public class Materials {
+public class Materials implements Register {
 
 	private static final int NUM_MATERIALS = 8;
 	private static final String[] MATERIAL_NAMES = new String[NUM_MATERIALS];
@@ -13,6 +14,7 @@ public class Materials {
 	private int[] units = new int[NUM_MATERIALS];
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
+	private FileManager file = FileManager.getFileManager();
 
 	static {
 		MATERIAL_NAMES[0] = "3M polírpaszta";
@@ -26,9 +28,9 @@ public class Materials {
 	}
 
 	{
-		Main.file.loadDefaultPrices(this);
-		Main.file.loadDefaultUnits(this);
-		Main.file.loadDefaultQuants(this);
+		file.loadDefaultPrices(this);
+		file.loadDefaultUnits(this);
+		file.loadDefaultQuants(this);
 	}
 
 	public void addMaterialOrdered() {
@@ -36,10 +38,10 @@ public class Materials {
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
-		if (choice != Main.EXIT_VALUE) {
+		if (choice != EXIT_VALUE) {
 			choice--;
 			double change = input.askInputDouble("A rendelt mennyiség literben: ");
-			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[choice], new double[] { quants[choice], quants[choice] + change });
+			printer.printChange("felhasznált " + MATERIAL_NAMES[choice], new Number[] { quants[choice], quants[choice] + change });
 			quants[choice] += change;
 		}
 	}
@@ -49,9 +51,9 @@ public class Materials {
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
-		if (choice != Main.EXIT_VALUE) {
+		if (choice != EXIT_VALUE) {
 			double change = input.askInputDouble("A készletváltozás literben (készletcsökkenés esetén negatív): ");
-			printer.printChangeDouble("felhasznált " + MATERIAL_NAMES[--choice], new double[] { quants[choice], quants[choice] - change });
+			printer.printChange("felhasznált " + MATERIAL_NAMES[--choice], new Number[] { quants[choice], quants[choice] - change });
 			quants[choice] -= change;
 		}
 	}
@@ -61,7 +63,7 @@ public class Materials {
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
-		if (choice != Main.EXIT_VALUE) {
+		if (choice != EXIT_VALUE) {
 			printer.print(String.format("%s, eddigi ára: %,d Ft/liter volt.%n", MATERIAL_NAMES[--choice], prices[choice]));
 			prices[choice] = input.askInputInt("Az új ára per liter: ");
 			printer.print(String.format("%s, módosított ára: %,d Ft/liter lett.%n", MATERIAL_NAMES[choice], prices[choice]));
@@ -73,14 +75,14 @@ public class Materials {
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
 		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
-		if (choice != Main.EXIT_VALUE) {
-			printer.print(String.format(MATERIAL_NAMES[--choice] + " kiszerelése: " + addUnit(choice) + "%n"));
+		if (choice != EXIT_VALUE) {
+			printer.print(String.format(MATERIAL_NAMES[--choice] + " kiszerelése: " + addUnitName(choice) + "%n"));
 			units[choice] = input.askInputInt("Az új kiszerelés ml-ben megadva (1 liter = 1000 ml): ");
-			printer.print(String.format("%s, módosított kiszerelése: %s%n", MATERIAL_NAMES[choice], addUnit(choice)));
+			printer.print(String.format("%s, módosított kiszerelése: %s%n", MATERIAL_NAMES[choice], addUnitName(choice)));
 		}
 	}
 
-	public String addUnit(int i) {
+	public String addUnitName(int i) {
 		return units[i] >= 1000 ? "" + units[i] / 1000 + " liter." : "" + units[i] + " ml.";
 	}
 

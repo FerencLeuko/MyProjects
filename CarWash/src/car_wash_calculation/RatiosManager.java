@@ -1,10 +1,11 @@
 package car_wash_calculation;
 
-import car_wash_data.Materials;
-import car_wash_data.Services;
+import car_wash_main.FileManager;
 import car_wash_main.Main;
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
+import car_wash_register.Materials;
+import car_wash_register.Services;
 
 public class RatiosManager {
 
@@ -12,6 +13,7 @@ public class RatiosManager {
 	private Printer printer = new Printer();
 	private Materials materials = new Materials();
 	private Services services = new Services();
+	private final FileManager file = FileManager.getFileManager();
 
 	private int small1;
 	private int small2;
@@ -67,9 +69,9 @@ public class RatiosManager {
 	private void askFirstData() {
 		int fileNum = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni: ");
 		String fileNumber = "" + fileNum;
-		Main.file.loadMaterialQuants(materials, fileNumber);
-		Main.file.loadServiceQSmall(services, fileNumber);
-		Main.file.loadServiceQLarge(services, fileNumber);
+		file.loadMaterialQuants(materials, fileNumber);
+		file.loadServiceQSmall(services, fileNumber);
+		file.loadServiceQLarge(services, fileNumber);
 		small1 = services.getQSmall(choice);
 		large1 = services.getQLarge(choice);
 		material1 = materials.getQuant(choice);
@@ -78,9 +80,9 @@ public class RatiosManager {
 	private void askSecondData() {
 		int fileNum = input.askInputInt("Melyik sorszámú munkamenetet szeretné betölteni: ");
 		String fileNumber = "" + fileNum;
-		Main.file.loadMaterialQuants(materials, fileNumber);
-		Main.file.loadServiceQSmall(services, fileNumber);
-		Main.file.loadServiceQLarge(services, fileNumber);
+		file.loadMaterialQuants(materials, fileNumber);
+		file.loadServiceQSmall(services, fileNumber);
+		file.loadServiceQLarge(services, fileNumber);
 		small2 = services.getQSmall(choice);
 		large2 = services.getQLarge(choice);
 		material2 = materials.getQuant(choice);

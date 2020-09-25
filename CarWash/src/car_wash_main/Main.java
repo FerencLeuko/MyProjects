@@ -1,15 +1,15 @@
 package car_wash_main;
 
-import car_wash_data.CurrentDate;
-import car_wash_data.Materials;
-import car_wash_data.Services;
 import car_wash_menu.MenuFactory;
+import car_wash_register.CurrentDate;
+import car_wash_register.Materials;
+import car_wash_register.Services;
 
 public class Main {
 
 	public static final int EXIT_VALUE = Integer.MIN_VALUE;
 	public static final char EXIT_CHAR = '*';
-	public static FileManager file = FileManager.getFileManager();
+	private final FileManager file = FileManager.getFileManager();
 	private Materials materials = new Materials();
 	private Services services = new Services();
 	private UserInput input = new UserInput();
@@ -35,12 +35,12 @@ public class Main {
 		initNewRun();
 		while (true) {
 			try {
-				printer.printMenu(menuSelection);
+				printer.printMenu(true, menuSelection);
 				int choice = input.askInputWithExitAndLimits("Az ön által kért menüpont: ", numMenu);
 				if (choice == EXIT_VALUE) {
 					break;
 				}
-				selectMenuAction(choice);
+				selectMenuAction(choice);	
 				file.autoSave(materials, services);
 			} catch (Exception e) {
 				System.out.print("Hiba történt!");
@@ -57,9 +57,9 @@ public class Main {
 		file.loadAutoSave(materials, services);
 		file.initWorkSessionList();
 	}
-
+	
 	private void selectMenuAction(int choice) {
-		if (menuSelection[--choice].getName().equals("Extrák")) {
+		if (menuSelection[--choice].getName().equals(Menu.EXTRAS_NAME)) {
 			selectExtras();
 		} else {
 			menuSelection[choice].menuAction(materials, services);
@@ -67,7 +67,7 @@ public class Main {
 	}
 
 	private void selectExtras() {
-		printer.printExtras(extraSelection);
+		printer.printMenu(false, extraSelection);
 		int choice = input.askInputWithExitAndLimits("Az ön által kért menüpont: ", numExtras);
 		if (choice != EXIT_VALUE) {
 			extraSelection[--choice].menuAction(materials, services);

@@ -1,30 +1,25 @@
 package car_wash_main;
 
 import car_wash_calculation.Calculator;
-import car_wash_data.AllData;
-import car_wash_data.Materials;
-import car_wash_data.Services;
+import car_wash_register.AllData;
+import car_wash_register.Materials;
+import car_wash_register.Services;
 
 public class Printer {
 
-	public void printNames(String[] names) {
+	public void printNames(String... names) {
 		System.out.println();
 		for (int i = 0; i < names.length; i++) {
 			System.out.println(1 + i + ". " + names[i]);
 		}
 	}
 
-	public void printChangeInt(String name, int[] changeInfo) {
-		System.out.printf("Az eddigi %s %,d volt.%n", name, changeInfo[0]);
-		System.out.printf("A módosított %s %,d lett.%n", name, changeInfo[1]);
+	public <T> void printChange(String name, T[] changeInfo) {
+		System.out.println("Az eddigi "+name+" "+ changeInfo[0] +" volt.");
+		System.out.println("Az eddigi "+name+" "+ changeInfo[1] +" lett.");
 	}
 
-	public void printChangeDouble(String name, double[] changeInfo) {
-		System.out.printf("Az eddigi %s %,.2f volt.%n", name, changeInfo[0]);
-		System.out.printf("A módosított %s %,.2f lett.%n", name, changeInfo[1]);
-	}
-
-	public void printPrices(int[] prices) {
+	public void printPrices(int... prices) {
 		System.out.printf("%nAz áradatok a következők: %n");
 		for (int i = 0; i < Materials.getMaterialNames().length; i++) {
 			System.out.printf("%s, amely jelenlegi ára: %,d Ft/liter.%n", Materials.getMaterialNames()[i], prices[i]);
@@ -65,7 +60,7 @@ public class Printer {
 		Materials materials = data.getMaterials();
 		Services services = data.getServices();
 		System.out.printf("%n%s%s.", "Az anyag: ", Materials.getMaterialNames()[choice]);
-		System.out.printf("%n%s%s", "Az anyag kiszerelése: ", materials.addUnit(choice));
+		System.out.printf("%n%s%s", "Az anyag kiszerelése: ", materials.addUnitName(choice));
 		System.out.printf("%n%s%s.", "Az anyaghoz kapcsolódó szolgáltatás: ", Services.getServiceNames()[choice]);
 		System.out.printf("%n%s%.2f.", "A szolgáltatás kis/nagy autó anyagráfordítás aránya: ", services.getsLRatio() [choice]);
 		System.out.printf("%n%s%s.", "Az összes szolgáltatás kis autóra: ", services.getQSmall()[choice]);
@@ -99,22 +94,13 @@ public class Printer {
 		return (quantMax<=100) ? 1 : (int) quantMax/50;
 	}
 
-	public void printMenu(Menu[] selection) {
+	public void printMenu(boolean mainMenu, Menu... selection) {
 		System.out.printf("%nKérem, válasszon az alábbi lehetőségek közül:%n");
 		int count = 1;
-		for (Menu menu: selection) {
-			System.out.printf("%d. %s%n",count++, menu.getName());
+		for (Menu menu : selection) {
+			System.out.printf("%d. %s%n", count++, menu.getName());
 		}
-		System.out.println("* Kilépés");
-	}
-	
-	public void printExtras(Menu[] selection) {
-		System.out.printf("%nKérem, válasszon az alábbi lehetőségek közül:%n");	
-		int count = 1;
-		for (Menu menu: selection) {
-			System.out.printf("%d. %s%n",count++, menu.getName());
-		}
-		System.out.println("* Mégsem");
+		System.out.println(mainMenu ? "* Kilépés" : "* Mégsem");
 	}
 
 	public void printExit() {

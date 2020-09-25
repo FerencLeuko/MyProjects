@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import car_wash_data.CurrentDate;
-import car_wash_data.Materials;
-import car_wash_data.Services;
+import car_wash_register.CurrentDate;
+import car_wash_register.Materials;
+import car_wash_register.Services;
 
 public class FileManager {
 
@@ -24,7 +24,7 @@ public class FileManager {
 	
 	private static final FileManager FILE = new FileManager();
 	
-	static FileManager getFileManager() {
+	public static FileManager getFileManager() {
 		return FILE;
 	}
 
