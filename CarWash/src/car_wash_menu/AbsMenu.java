@@ -7,14 +7,11 @@ import car_wash_register.Services;
 abstract class AbsMenu implements Menu {
 
 	String menuName;
-	
+
 	public String getName() {
 		return menuName;
 	}
 
 	public abstract void menuAction(Materials materials, Services services);
-		// TODO Auto-generated method stub
-	
-	
 
 }

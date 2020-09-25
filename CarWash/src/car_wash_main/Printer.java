@@ -9,8 +9,9 @@ public class Printer {
 
 	public void printNames(String... names) {
 		System.out.println();
-		for (int i = 0; i < names.length; i++) {
-			System.out.println(1 + i + ". " + names[i]);
+		int count = 1;
+		for (String name : names) {
+			System.out.printf("%d. %s%n", count++, name);
 		}
 	}
 
