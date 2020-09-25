@@ -30,21 +30,20 @@ public class FileManager {
 
 	public void initWorkSessionList() {
 		try {
-			int[] fileNumbers = readDataFromFileInt("workSessionList");
-			for (int fileNumber : fileNumbers) {
-				updateWorkSessionList(fileNumber);
+			for (int fileNumber : readDataFromFileInt("workSessionList")) {
+				workSessionList.add(fileNumber);
 			}
 		} catch (Exception e) {
 		}
 		return;
 	}
-	
+
 	private void updateWorkSessionList(int fileNumber) {
 		if (!workSessionList.contains(fileNumber)) {
 			workSessionList.add(fileNumber);
+			int[] fileNumbersArray = workSessionList.stream().mapToInt(i -> i).toArray();
+			saveDataToFileInt("workSessionList", fileNumbersArray);
 		}
-		int[] fileNumbersArray = workSessionList.stream().mapToInt(i -> i).toArray();
-		saveDataToFileInt("workSessionList", fileNumbersArray);
 	}
 
 	public void loadAutoSave(Materials materials, Services services) {
