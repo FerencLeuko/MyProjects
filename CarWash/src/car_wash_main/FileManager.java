@@ -30,9 +30,8 @@ public class FileManager {
 
 	public void initWorkSessionList() {
 		try {
-			int[] fileNumbers = readDataFromFileInt("workSessionList");
-			for (int fileNumber : fileNumbers) {
-				updateWorkSessionList(fileNumber);
+			for (int fileNumber : readDataFromFileInt("workSessionList")) {
+				workSessionList.add(fileNumber);
 			}
 		} catch (Exception e) {
 		}
