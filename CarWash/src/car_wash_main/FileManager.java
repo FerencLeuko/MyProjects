@@ -18,12 +18,12 @@ public class FileManager {
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
 	private static List<Integer> workSessionList = new LinkedList<Integer>();
-	
+
 	private FileManager() {
 	}
-	
+
 	private static final FileManager FILE = new FileManager();
-	
+
 	public static FileManager getFileManager() {
 		return FILE;
 	}
@@ -38,13 +38,13 @@ public class FileManager {
 		}
 		return;
 	}
-	
+
 	private void updateWorkSessionList(int fileNumber) {
 		if (!workSessionList.contains(fileNumber)) {
 			workSessionList.add(fileNumber);
+			int[] fileNumbersArray = workSessionList.stream().mapToInt(i -> i).toArray();
+			saveDataToFileInt("workSessionList", fileNumbersArray);
 		}
-		int[] fileNumbersArray = workSessionList.stream().mapToInt(i -> i).toArray();
-		saveDataToFileInt("workSessionList", fileNumbersArray);
 	}
 
 	public void loadAutoSave(Materials materials, Services services) {
@@ -52,7 +52,8 @@ public class FileManager {
 		try {
 			lastSavedNum = readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
 			loadAll(materials, services, lastSavedNum);
-			printer.print(String.format("A legutóbbi munkamenet betöltése megtörtént, sorszáma: %s.%n", lastSavedNum == "" ? "nem volt" : lastSavedNum));
+			printer.print(
+					String.format("A legutóbbi munkamenet betöltése megtörtént, sorszáma: %s.%n", lastSavedNum == "" ? "nem volt" : lastSavedNum));
 		} catch (Exception e) {
 			startNewWorkSession(materials, services);
 			printer.print(String.format("Nem volt korábbi mentett munkamenet.%n"));
@@ -96,7 +97,7 @@ public class FileManager {
 			printer.print("Nem sikerült a lista betöltése.");
 		}
 	}
-	
+
 	public void startNewWorkSession(Materials materials, Services services) {
 		try {
 			loadDefaultQuants(materials);
@@ -113,7 +114,6 @@ public class FileManager {
 		}
 	}
 
-
 	public void loadDefaultRatios(Services services) {
 		try {
 			services.setsLRatio(readDataFromFileDouble("ServiceRatios_default"));
@@ -129,7 +129,7 @@ public class FileManager {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
-	
+
 	public void loadDefaultUnits(Materials materials) {
 		try {
 			materials.setUnits(readDataFromFileInt("MaterialUnits_default"));
@@ -137,7 +137,7 @@ public class FileManager {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
-	
+
 	public void loadDefaultQuants(Materials materials) {
 		try {
 			materials.setQuants(readDataFromFileDouble("MaterialQ_default"));
@@ -145,7 +145,7 @@ public class FileManager {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
-	
+
 	public void loadDefaultServicesQ(Services services) {
 		try {
 			services.setQSmall(readDataFromFileInt("ServiceQSmall_default"));
@@ -218,7 +218,7 @@ public class FileManager {
 	public void loadMaterialPrices(Materials materials, String fileNumber) {
 		materials.setPrices(readDataFromFileInt("MaterialP" + fileNumber));
 	}
-	
+
 	public String loadLastSavedNumber() {
 		return readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
 	}
