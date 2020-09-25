@@ -1,7 +1,6 @@
 package car_wash_register;
 
 import car_wash_main.Register;
-import car_wash_main.FileManager;
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
 
@@ -14,7 +13,6 @@ public class Materials implements Register {
 	private int[] units = new int[NUM_MATERIALS];
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
-	private FileManager file = FileManager.getFileManager();
 
 	static {
 		MATERIAL_NAMES[0] = "3M polírpaszta";
