@@ -18,8 +18,6 @@ public class Main {
 	private MenuFactory menu = new MenuFactory();
 	private final Menu[] menuSelection = menu.getMenuSelection();
 	private final Menu[] extraSelection = menu.getExtraSelection();
-	private final int numMenu = menuSelection.length;
-	private final int numExtras = extraSelection.length;
 
 	public static void main(String[] args) {
 		try {
@@ -36,11 +34,11 @@ public class Main {
 		while (true) {
 			try {
 				printer.printMenu(true, menuSelection);
-				int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", numMenu);
+				int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", menuSelection.length);
 				if (choice == EXIT_VALUE) {
 					break;
 				}
-				selectMenuAction(choice);	
+				selectMenuAction(choice);
 				file.autoSave(materials, services);
 			} catch (Exception e) {
 				System.out.print("Hiba történt!");
@@ -57,7 +55,7 @@ public class Main {
 		file.loadAutoSave(materials, services);
 		file.initWorkSessionList();
 	}
-	
+
 	private void selectMenuAction(int choice) {
 		if (menuSelection[--choice].getName().equals(Menu.EXTRAS_NAME)) {
 			selectExtras();
@@ -68,7 +66,7 @@ public class Main {
 
 	private void selectExtras() {
 		printer.printMenu(false, extraSelection);
-		int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", numExtras);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", extraSelection.length);
 		if (choice != EXIT_VALUE) {
 			extraSelection[--choice].menuAction(materials, services);
 		}
