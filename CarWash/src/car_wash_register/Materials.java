@@ -1,29 +1,21 @@
 package car_wash_register;
 
 import car_wash_main.Register;
+
+import java.util.Arrays;
+
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
 
 public class Materials implements Register {
 
-	private static final int NUM_MATERIALS = 8;
-	private static final String[] MATERIAL_NAMES = new String[NUM_MATERIALS];
+	private static final String[] MATERIAL_NAMES = file.loadDefaultNames("MaterialNames_default");
+	private static final int NUM_MATERIALS = MATERIAL_NAMES.length;
 	private double[] quants = new double[NUM_MATERIALS];
 	private int[] prices = new int[NUM_MATERIALS];
 	private int[] units = new int[NUM_MATERIALS];
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
-
-	static {
-		MATERIAL_NAMES[0] = "3M polírpaszta";
-		MATERIAL_NAMES[1] = "Nasiol Protect";
-		MATERIAL_NAMES[2] = "VMD spray";
-		MATERIAL_NAMES[3] = "Astonish";
-		MATERIAL_NAMES[4] = "Universal";
-		MATERIAL_NAMES[5] = "Hill Vital";
-		MATERIAL_NAMES[6] = "Prevent";
-		MATERIAL_NAMES[7] = "Motor cleaner";
-	}
 
 	{
 		file.loadDefaultPrices(this);

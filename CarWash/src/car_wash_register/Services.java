@@ -6,9 +6,9 @@ import car_wash_main.UserInput;
 
 public class Services implements Register {
 
-	private static final int NUM_SERVICES = 8;
-	private static final double DEFAULT_RATIO = 2d;
-	private static final String[] SERVICE_NAMES = new String[NUM_SERVICES];
+	private static final String[] SERVICE_NAMES = file.loadDefaultNames("ServiceNames_default");
+	private static final int NUM_SERVICES = SERVICE_NAMES.length;
+	private static final double DEFAULT_RATIO;
 	private double[] sLRatio = new double[NUM_SERVICES];
 	private int[] QSmall = new int[NUM_SERVICES];
 	private int[] QLarge = new int[NUM_SERVICES];
@@ -16,22 +16,14 @@ public class Services implements Register {
 	private Printer printer = new Printer();
 
 	static {
-		SERVICE_NAMES[0] = "Polírozás";
-		SERVICE_NAMES[1] = "Nanokerámiás kezelés";
-		SERVICE_NAMES[2] = "Kárpittisztítás";
-		SERVICE_NAMES[3] = "Padlótisztítás";
-		SERVICE_NAMES[4] = "Mosás";
-		SERVICE_NAMES[5] = "Légtérfrissítés";
-		SERVICE_NAMES[6] = "Waxolás";
-		SERVICE_NAMES[7] = "Motormosás";
-
+		DEFAULT_RATIO = file.loadDefaultDataDouble("Ratio_default")[0];
 	}
 
 	{
 		for (int i = 0; i < NUM_SERVICES; i++) {
-		sLRatio[i] = DEFAULT_RATIO;
-		QSmall[i] = 0;
-		QLarge[i] = 0;
+			sLRatio[i] = DEFAULT_RATIO;
+			QSmall[i] = 0;
+			QLarge[i] = 0;
 		}
 
 	}

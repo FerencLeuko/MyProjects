@@ -1,5 +1,7 @@
 package car_wash_main;
 
+import java.util.Arrays;
+
 import car_wash_menu.MenuFactory;
 import car_wash_register.CurrentDate;
 import car_wash_register.Materials;

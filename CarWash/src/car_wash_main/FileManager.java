@@ -112,6 +112,26 @@ public class FileManager {
 			System.out.println("Nem sikerült a betöltés. A munkamenet a beépített adatokkal indul.");
 		}
 	}
+	
+	public String[] loadDefaultNames(String fileName) {
+		String[] names = null;
+		try {
+			names = readDataFromFileString(fileName);
+		} catch (Exception e) {
+			printer.print("Nem sikerült a betöltés.");
+		}
+		return names;
+	}
+	
+	public double[] loadDefaultDataDouble(String fileName) {
+		double[] data = null;
+		try {
+			data = readDataFromFileDouble(fileName);
+		} catch (Exception e) {
+			printer.print("Nem sikerült a betöltés.");
+		}
+		return data;
+	}
 
 	public void loadDefaultRatios(Services services) {
 		try {
@@ -152,6 +172,43 @@ public class FileManager {
 		} catch (Exception e) {
 			printer.print("Nem sikerült a betöltés.");
 		}
+	}
+	
+	public void loadServiceRatios(Services services, String fileNumber) {
+		services.setsLRatio(readDataFromFileDouble("ServiceRatios" + fileNumber));
+	}
+
+	public void loadServiceQLarge(Services services, String fileNumber) {
+		services.setQLarge(readDataFromFileInt("ServiceQLarge" + fileNumber));
+	}
+
+	public void loadServiceQSmall(Services services, String fileNumber) {
+		services.setQSmall(readDataFromFileInt("ServiceQSmall" + fileNumber));
+	}
+
+	public void loadMaterialQuants(Materials materials, String fileNumber) {
+		materials.setQuants(readDataFromFileDouble("MaterialQ" + fileNumber));
+	}
+
+	public void loadMaterialUnits(Materials materials, String fileNumber) {
+		materials.setUnits(readDataFromFileInt("MaterialUnits" + fileNumber));
+	}
+
+	public void loadMaterialPrices(Materials materials, String fileNumber) {
+		materials.setPrices(readDataFromFileInt("MaterialP" + fileNumber));
+	}
+
+	public String loadLastSavedNumber() {
+		return readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
+	}
+
+	private void loadAll(Materials materials, Services services, String fileNumber) {
+		loadMaterialPrices(materials, fileNumber);
+		loadMaterialUnits(materials, fileNumber);
+		loadMaterialQuants(materials, fileNumber);
+		loadServiceQSmall(services, fileNumber);
+		loadServiceQLarge(services, fileNumber);
+		loadServiceRatios(services, fileNumber);
 	}
 
 	public void autoSave(Materials materials, Services services) {
@@ -194,43 +251,6 @@ public class FileManager {
 		}
 	}
 
-	public void loadServiceRatios(Services services, String fileNumber) {
-		services.setsLRatio(readDataFromFileDouble("ServiceRatios" + fileNumber));
-	}
-
-	public void loadServiceQLarge(Services services, String fileNumber) {
-		services.setQLarge(readDataFromFileInt("ServiceQLarge" + fileNumber));
-	}
-
-	public void loadServiceQSmall(Services services, String fileNumber) {
-		services.setQSmall(readDataFromFileInt("ServiceQSmall" + fileNumber));
-	}
-
-	public void loadMaterialQuants(Materials materials, String fileNumber) {
-		materials.setQuants(readDataFromFileDouble("MaterialQ" + fileNumber));
-	}
-
-	public void loadMaterialUnits(Materials materials, String fileNumber) {
-		materials.setUnits(readDataFromFileInt("MaterialUnits" + fileNumber));
-	}
-
-	public void loadMaterialPrices(Materials materials, String fileNumber) {
-		materials.setPrices(readDataFromFileInt("MaterialP" + fileNumber));
-	}
-
-	public String loadLastSavedNumber() {
-		return readTextFromFile("lastSavedNum").replaceAll("[^0-9. ]", "");
-	}
-
-	private void loadAll(Materials materials, Services services, String fileNumber) {
-		loadMaterialPrices(materials, fileNumber);
-		loadMaterialUnits(materials, fileNumber);
-		loadMaterialQuants(materials, fileNumber);
-		loadServiceQSmall(services, fileNumber);
-		loadServiceQLarge(services, fileNumber);
-		loadServiceRatios(services, fileNumber);
-	}
-
 	private void saveAll(Materials materials, Services services, String fileNumber) {
 		saveDataToFileInt("MaterialP" + fileNumber, materials.getPrices());
 		saveDataToFileInt("MaterialUnits" + fileNumber, materials.getUnits());
@@ -240,6 +260,10 @@ public class FileManager {
 		saveDataToFileDouble("ServiceRatios" + fileNumber, services.getsLRatio());
 	}
 
+	private String[] readDataFromFileString(String filename) {
+		return readTextFromFile(filename).replace("[","").replace("]","").strip().split(", ");
+	}
+	
 	private double[] readDataFromFileDouble(String filename) {
 		String[] Q = readTextFromFile(filename).replaceAll("[^0-9. ]", "").split(" ");
 		return Arrays.stream(Q).mapToDouble(Double::parseDouble).toArray();
@@ -257,6 +281,10 @@ public class FileManager {
 	private void saveDataToFileInt(String filename, int[] data) {
 		writeTextToFile(filename, Arrays.toString(data));
 	}
+	
+//	private <T> void saveDataToFile(String filename, T[] data) {
+//		writeTextToFile(filename, Arrays.toString(data));
+//	}
 
 	private String readTextFromFile(String source) {
 		try {
