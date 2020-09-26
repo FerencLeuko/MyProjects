@@ -113,17 +113,17 @@ public class FileManager {
 		}
 	}
 	
-	public String[] loadDefaultNames(String fileName) {
-		String[] names = null;
+	public String[] loadNames(String fileName) {
+		String[] array = null;
 		try {
-			names = readDataFromFileString(fileName);
+			array = readDataFromFileString(fileName);
 		} catch (Exception e) {
 			printer.print("Nem sikerült a betöltés.");
 		}
-		return names;
+		return array;
 	}
 	
-	public double[] loadDefaultDataDouble(String fileName) {
+	public double[] loadDoubleArray(String fileName) {
 		double[] data = null;
 		try {
 			data = readDataFromFileDouble(fileName);

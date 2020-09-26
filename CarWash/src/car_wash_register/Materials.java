@@ -1,15 +1,12 @@
 package car_wash_register;
 
 import car_wash_main.Register;
-
-import java.util.Arrays;
-
 import car_wash_main.Printer;
 import car_wash_main.UserInput;
 
 public class Materials implements Register {
 
-	private static final String[] MATERIAL_NAMES = file.loadDefaultNames("MaterialNames_default");
+	private static final String[] MATERIAL_NAMES = file.loadNames("MaterialNames");
 	private static final int NUM_MATERIALS = MATERIAL_NAMES.length;
 	private double[] quants = new double[NUM_MATERIALS];
 	private int[] prices = new int[NUM_MATERIALS];

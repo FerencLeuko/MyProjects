@@ -6,7 +6,7 @@ import car_wash_main.UserInput;
 
 public class Services implements Register {
 
-	private static final String[] SERVICE_NAMES = file.loadDefaultNames("ServiceNames_default");
+	private static final String[] SERVICE_NAMES = file.loadNames("ServiceNames");
 	private static final int NUM_SERVICES = SERVICE_NAMES.length;
 	private static final double DEFAULT_RATIO;
 	private double[] sLRatio = new double[NUM_SERVICES];
@@ -16,7 +16,7 @@ public class Services implements Register {
 	private Printer printer = new Printer();
 
 	static {
-		DEFAULT_RATIO = file.loadDefaultDataDouble("Ratio_default")[0];
+		DEFAULT_RATIO = file.loadDoubleArray("Ratio_default")[0];
 	}
 
 	{
