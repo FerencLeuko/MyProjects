@@ -28,7 +28,7 @@ public class RatiosManager {
 			printer.print(String.format("Kis és nagy autó anyagfelhasználás pontosítása számításokkal.%n"));
 			printer.printNames(Materials.getMaterialNames());
 			printer.print(String.format("* Mégsem%n"));
-			choice = input.askInputWithExitAndLimits("A választott anyag: ", Materials.getMaterialNames().length);
+			choice = input.askInputIntWithLimitsAndExitOption("A választott anyag: ", Materials.getMaterialNames().length);
 			if (choice != Main.EXIT_VALUE) {
 				choice--;
 				askInfo();

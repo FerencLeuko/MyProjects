@@ -39,8 +39,8 @@ public class UserInput {
 		} while (input > max || input < 1);
 		return input;
 	}
-	
-	public int askInputWithExitAndLimits(String text, int max) {
+
+	public int askInputIntWithLimitsAndExitOption(String text, int max) {
 		int input = 0;
 		do {
 			try {

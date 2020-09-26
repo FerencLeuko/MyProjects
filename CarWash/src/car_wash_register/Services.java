@@ -32,7 +32,7 @@ public class Services implements Register {
 		printer.print(String.format("Eladott szolgáltatások hozzáadása:%n"));
 		printer.printNames(SERVICE_NAMES);
 		printer.print(String.format("* Mégsem%n"));
-		int choice = input.askInputWithExitAndLimits("A szolgáltatás: ", SERVICE_NAMES.length);
+		int choice = input.askInputIntWithLimitsAndExitOption("A szolgáltatás: ", SERVICE_NAMES.length);
 		if (choice != EXIT_VALUE) {
 			choice--;
 			int change = input.askInputInt("Az eladott szolgáltatás mennyisége: ");

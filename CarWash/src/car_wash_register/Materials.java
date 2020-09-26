@@ -24,7 +24,7 @@ public class Materials implements Register {
 		printer.print(String.format("Anyagrendelés hozzáadása:%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
-		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az anyag: ", MATERIAL_NAMES.length);
 		if (choice != EXIT_VALUE) {
 			choice--;
 			double change = input.askInputDouble("A rendelt mennyiség literben: ");
@@ -37,7 +37,7 @@ public class Materials implements Register {
 		printer.print(String.format("Készletváltozás rögzítése:%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
-		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az anyag: ", MATERIAL_NAMES.length);
 		if (choice != EXIT_VALUE) {
 			double change = input.askInputDouble("A készletváltozás literben (készletcsökkenés esetén negatív): ");
 			printer.printChange("felhasznált " + MATERIAL_NAMES[--choice], new Number[] { quants[choice], quants[choice] - change });
@@ -49,7 +49,7 @@ public class Materials implements Register {
 		printer.print(String.format("Anyagár módosítása (kiszerelés módosítása):%n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
-		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az anyag: ", MATERIAL_NAMES.length);
 		if (choice != EXIT_VALUE) {
 			printer.print(String.format("%s, eddigi ára: %,d Ft/liter volt.%n", MATERIAL_NAMES[--choice], prices[choice]));
 			prices[choice] = input.askInputInt("Az új ára per liter: ");
@@ -61,7 +61,7 @@ public class Materials implements Register {
 		printer.print(String.format("Anyagok kiszerelésének módosítása: %n"));
 		printer.printNames(MATERIAL_NAMES);
 		printer.print(String.format("* Mégsem%n"));
-		int choice = input.askInputWithExitAndLimits("Az anyag: ", MATERIAL_NAMES.length);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az anyag: ", MATERIAL_NAMES.length);
 		if (choice != EXIT_VALUE) {
 			printer.print(String.format(MATERIAL_NAMES[--choice] + " kiszerelése: " + addUnitName(choice) + "%n"));
 			units[choice] = input.askInputInt("Az új kiszerelés ml-ben megadva (1 liter = 1000 ml): ");

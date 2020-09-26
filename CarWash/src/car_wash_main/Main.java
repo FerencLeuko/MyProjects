@@ -1,7 +1,5 @@
 package car_wash_main;
 
-import java.util.Arrays;
-
 import car_wash_menu.MenuFactory;
 import car_wash_register.CurrentDate;
 import car_wash_register.Materials;
@@ -38,7 +36,7 @@ public class Main {
 		while (true) {
 			try {
 				printer.printMenu(true, menuSelection);
-				int choice = input.askInputWithExitAndLimits("Az ön által kért menüpont: ", numMenu);
+				int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", numMenu);
 				if (choice == EXIT_VALUE) {
 					break;
 				}
@@ -70,7 +68,7 @@ public class Main {
 
 	private void selectExtras() {
 		printer.printMenu(false, extraSelection);
-		int choice = input.askInputWithExitAndLimits("Az ön által kért menüpont: ", numExtras);
+		int choice = input.askInputIntWithLimitsAndExitOption("Az ön által kért menüpont: ", numExtras);
 		if (choice != EXIT_VALUE) {
 			extraSelection[--choice].menuAction(materials, services);
 		}
