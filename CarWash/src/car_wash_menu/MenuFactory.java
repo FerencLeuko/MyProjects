@@ -10,6 +10,10 @@ public class MenuFactory implements MenuSelection {
 
 	private final Menu[] extraSelection = { new RatioCalculation(), new Sum(), new ChangePrice(), new ChangeUnit(), new DefaultPrice(), new DefaultRatio() };
 
+	public static MenuFactory getInstance() {
+		return new MenuFactory();
+	}
+	
 	public Menu[] getMenuSelection() {
 		return menuSelection;
 	}

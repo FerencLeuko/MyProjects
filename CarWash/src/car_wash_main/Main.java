@@ -15,7 +15,7 @@ public class Main {
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
-	private MenuFactory menu = new MenuFactory();
+	private MenuFactory menu = MenuFactory.getInstance();
 	private final Menu[] menuSelection = menu.getMenuSelection();
 	private final Menu[] extraSelection = menu.getExtraSelection();
 
