@@ -1,8 +1,8 @@
-package car_wash_menu;
+package car_wash.main.menu;
 
-import car_wash_calculation.RatiosManager;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.calculation.RatiosManager;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 public class RatioCalculation extends AbsMenu {
 	

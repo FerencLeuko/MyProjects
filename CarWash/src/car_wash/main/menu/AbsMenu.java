@@ -1,8 +1,8 @@
-package car_wash_menu;
+package car_wash.main.menu;
 
-import car_wash_main.Menu;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.main.Menu;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 abstract class AbsMenu implements Menu {
 

@@ -1,4 +1,4 @@
-package car_wash_main;
+package car_wash.main;
 
 
 public interface Register {

@@ -1,4 +1,4 @@
-package car_wash_main;
+package car_wash.main;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import car_wash_register.CurrentDate;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.register.CurrentDate;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 public class FileManager {
 

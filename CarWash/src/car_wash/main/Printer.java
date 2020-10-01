@@ -1,9 +1,9 @@
-package car_wash_main;
+package car_wash.main;
 
-import car_wash_calculation.Calculator;
-import car_wash_register.AllData;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.calculation.Calculator;
+import car_wash.register.AllData;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 public class Printer {
 

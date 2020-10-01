@@ -1,7 +1,7 @@
-package car_wash_menu;
+package car_wash.main.menu;
 
-import car_wash_main.Menu;
-import car_wash_main.MenuSelection;
+import car_wash.main.Menu;
+import car_wash.main.MenuSelection;
 
 public class MenuFactory implements MenuSelection {
 

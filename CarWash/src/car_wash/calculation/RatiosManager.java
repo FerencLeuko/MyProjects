@@ -1,11 +1,11 @@
-package car_wash_calculation;
+package car_wash.calculation;
 
-import car_wash_main.FileManager;
-import car_wash_main.Main;
-import car_wash_main.Printer;
-import car_wash_main.UserInput;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.main.FileManager;
+import car_wash.main.Main;
+import car_wash.main.Printer;
+import car_wash.main.UserInput;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 public class RatiosManager {
 

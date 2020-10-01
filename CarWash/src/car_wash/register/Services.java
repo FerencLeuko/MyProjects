@@ -1,8 +1,8 @@
-package car_wash_register;
+package car_wash.register;
 
-import car_wash_main.Register;
-import car_wash_main.Printer;
-import car_wash_main.UserInput;
+import car_wash.main.Printer;
+import car_wash.main.Register;
+import car_wash.main.UserInput;
 
 public class Services implements Register {
 

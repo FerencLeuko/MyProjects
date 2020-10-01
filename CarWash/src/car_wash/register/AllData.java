@@ -1,6 +1,6 @@
-package car_wash_register;
+package car_wash.register;
 
-import car_wash_main.Register;
+import car_wash.main.Register;
 
 public class AllData implements Register {
 	

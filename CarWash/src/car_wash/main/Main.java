@@ -1,9 +1,9 @@
-package car_wash_main;
+package car_wash.main;
 
-import car_wash_menu.MenuFactory;
-import car_wash_register.CurrentDate;
-import car_wash_register.Materials;
-import car_wash_register.Services;
+import car_wash.main.menu.MenuFactory;
+import car_wash.register.CurrentDate;
+import car_wash.register.Materials;
+import car_wash.register.Services;
 
 public class Main {
 
