@@ -10,7 +10,7 @@ public class SaveAs extends AbsMenu {
 	}
 
 	public void menuAction(Materials materials, Services services) {
-		file.saveAs(materials, services);
+		FILE.saveAs(materials, services);
 	}
 
 }

@@ -9,7 +9,7 @@ public class Main {
 
 	public static final int EXIT_VALUE = Integer.MIN_VALUE;
 	public static final char EXIT_CHAR = '*';
-	private final FileManager file = FileManager.getFileManager();
+	private static final FileManager FILE = FileManager.getFileManager();
 	private Materials materials = new Materials();
 	private Services services = new Services();
 	private UserInput input = new UserInput();
@@ -39,7 +39,7 @@ public class Main {
 					break;
 				}
 				selectMenuAction(choice);
-				file.autoSave(materials, services);
+				FILE.autoSave(materials, services);
 			} catch (Exception e) {
 				System.out.print("Hiba történt!");
 				System.out.println(e.getMessage());
@@ -52,8 +52,8 @@ public class Main {
 	private void initNewRun() {
 		printer.print(date.provideDateString());
 		printer.printGreetings();
-		file.loadAutoSave(materials, services);
-		file.initWorkSessionList();
+		FILE.loadAutoSave(materials, services);
+		FILE.initWorkSessionList();
 	}
 
 	private void selectMenuAction(int choice) {

@@ -10,7 +10,7 @@ public class NewSession extends AbsMenu {
 	}
 
 	public void menuAction(Materials materials, Services services) {
-		file.startNewWorkSession(materials, services);
+		FILE.startNewWorkSession(materials, services);
 	}
 
 }

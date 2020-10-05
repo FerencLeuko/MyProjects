@@ -13,7 +13,7 @@ public class DefaultPrice extends AbsMenu {
 	}
 
 	public void menuAction(Materials materials, Services services) {
-		file.loadDefaultPrices(materials);
+		FILE.loadDefaultPrices(materials);
 		printer.printPrices(materials.getPrices());
 	}
 

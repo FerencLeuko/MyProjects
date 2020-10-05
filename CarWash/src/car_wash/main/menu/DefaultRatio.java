@@ -13,7 +13,7 @@ public class DefaultRatio extends AbsMenu {
 	}
 
 	public void menuAction(Materials materials, Services services) {
-		file.loadDefaultRatios(services);
+		FILE.loadDefaultRatios(services);
 		printer.print(String.format("A beépített arányok (%.2f) visszaállítva.%n", services.getsLRatio()[0]));
 	}
 

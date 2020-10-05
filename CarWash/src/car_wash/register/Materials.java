@@ -6,7 +6,7 @@ import car_wash.main.UserInput;
 
 public class Materials implements Register {
 
-	private static final String[] MATERIAL_NAMES = file.loadNames("MaterialNames");
+	private static final String[] MATERIAL_NAMES = FILE.loadNames("MaterialNames");
 	private static final int NUM_MATERIALS = MATERIAL_NAMES.length;
 	private double[] quants = new double[NUM_MATERIALS];
 	private int[] prices = new int[NUM_MATERIALS];
@@ -15,9 +15,9 @@ public class Materials implements Register {
 	private Printer printer = new Printer();
 
 	{
-		file.loadDefaultPrices(this);
-		file.loadDefaultUnits(this);
-		file.loadDefaultQuants(this);
+		FILE.loadDefaultPrices(this);
+		FILE.loadDefaultUnits(this);
+		FILE.loadDefaultQuants(this);
 	}
 
 	public void addMaterialOrdered() {

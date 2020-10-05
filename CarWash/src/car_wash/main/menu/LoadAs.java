@@ -10,7 +10,7 @@ public class LoadAs extends AbsMenu {
 	}
 
 	public void menuAction(Materials materials, Services services) {
-		file.loadAs(materials, services);
+		FILE.loadAs(materials, services);
 	}
 
 }
