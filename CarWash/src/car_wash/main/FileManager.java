@@ -18,6 +18,7 @@ public class FileManager {
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
 	private static List<Integer> workSessionList = new LinkedList<Integer>();
+	private static final String FOLDER = "C:\\Dev\\workspace\\Git\\MyProjects\\CarWash\\savedFiles\\";
 
 	private FileManager() {
 	}
@@ -288,7 +289,7 @@ public class FileManager {
 
 	private String readTextFromFile(String source) {
 		try {
-			return Files.readString(Paths.get(source), StandardCharsets.UTF_8);
+			return Files.readString(Paths.get(FOLDER+source), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			System.err.println("Hiba történt fájl olvasáskor: " + e.getMessage());
 			return null;
@@ -297,7 +298,7 @@ public class FileManager {
 
 	private void writeTextToFile(String fileName, String text) {
 		try {
-			Files.writeString(Paths.get(fileName), text, StandardCharsets.UTF_8);
+			Files.writeString(Paths.get(FOLDER+fileName), text, StandardCharsets.UTF_8);
 		} catch (Exception ex) {
 			System.err.println("Hiba történt fájl írásakor: " + ex.getMessage());
 		}
