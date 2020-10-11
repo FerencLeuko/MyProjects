@@ -17,10 +17,11 @@ public class FileManager {
 	private UserInput input = new UserInput();
 	private Printer printer = new Printer();
 	private CurrentDate date = new CurrentDate();
-	private static List<Integer> workSessionList = new LinkedList<Integer>();
-	private static final String FOLDER = "C:\\Dev\\workspace\\Git\\MyProjects\\CarWash\\savedFiles\\";
+	private List<Integer> workSessionList = new LinkedList<Integer>();
+	private String folder;
 
 	private FileManager() {
+		loadFolderName();
 	}
 
 	private static final FileManager FILE = new FileManager();
@@ -113,7 +114,7 @@ public class FileManager {
 			System.out.println("Nem sikerült a betöltés. A munkamenet a beépített adatokkal indul.");
 		}
 	}
-	
+
 	public String[] loadNames(String fileName) {
 		String[] array = null;
 		try {
@@ -123,7 +124,7 @@ public class FileManager {
 		}
 		return array;
 	}
-	
+
 	public double[] loadDoubleArray(String fileName) {
 		double[] data = null;
 		try {
@@ -174,7 +175,7 @@ public class FileManager {
 			printer.print("Nem sikerült a betöltés.");
 		}
 	}
-	
+
 	public void loadServiceRatios(Services services, String fileNumber) {
 		services.setsLRatio(readDataFromFileDouble("ServiceRatios" + fileNumber));
 	}
@@ -262,9 +263,9 @@ public class FileManager {
 	}
 
 	private String[] readDataFromFileString(String filename) {
-		return readTextFromFile(filename).replace("[","").replace("]","").strip().split(", ");
+		return readTextFromFile(filename).replace("[", "").replace("]", "").strip().split(", ");
 	}
-	
+
 	private double[] readDataFromFileDouble(String filename) {
 		String[] Q = readTextFromFile(filename).replaceAll("[^0-9. ]", "").split(" ");
 		return Arrays.stream(Q).mapToDouble(Double::parseDouble).toArray();
@@ -282,14 +283,14 @@ public class FileManager {
 	private void saveDataToFileInt(String filename, int[] data) {
 		writeTextToFile(filename, Arrays.toString(data));
 	}
-	
+
 //	private <T> void saveDataToFile(String filename, T[] data) {
 //		writeTextToFile(filename, Arrays.toString(data));
 //	}
 
 	private String readTextFromFile(String source) {
 		try {
-			return Files.readString(Paths.get(FOLDER+source), StandardCharsets.UTF_8);
+			return Files.readString(Paths.get(folder + source), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			System.err.println("Hiba történt fájl olvasáskor: " + e.getMessage());
 			return null;
@@ -298,9 +299,18 @@ public class FileManager {
 
 	private void writeTextToFile(String fileName, String text) {
 		try {
-			Files.writeString(Paths.get(FOLDER+fileName), text, StandardCharsets.UTF_8);
+			Files.writeString(Paths.get(folder + fileName), text, StandardCharsets.UTF_8);
+
 		} catch (Exception ex) {
 			System.err.println("Hiba történt fájl írásakor: " + ex.getMessage());
+		}
+	}
+	
+	private void loadFolderName() {
+		try {
+			folder = Files.readString(Paths.get("folderName"), StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			System.err.println("Hiba történt fájl olvasáskor: " + e.getMessage());
 		}
 	}
 
