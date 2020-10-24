@@ -13,5 +13,5 @@ Role: developer (all coding).
 This program is a Five-In-A-Row game application.
 
 Project time frame: Oct 2020. Time spent: 8 days.
-Team: 1 member, indivdual task.
+Team: 1 member, individual task.
 Role: developer (all coding).
