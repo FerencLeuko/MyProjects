@@ -27,13 +27,7 @@ public class StorageImpl implements Storage {
 
 	@Override
 	public String loadText(String fileName) {
-		String load = null;
-		try {
-			load = Files.readString(Paths.get(properties.getRouteTexts() + fileName + ".txt"));
-		} catch (IOException | RuntimeException e) {
-			LOG.debug(String.format("Failed to load: %s!", e.getMessage()));
-		}
-		return load;
+		return loadString(Paths.get(properties.getRouteTexts() + fileName + ".txt"));
 	}
 
 	@Override
@@ -69,23 +63,12 @@ public class StorageImpl implements Storage {
 
 	@Override
 	public void saveReport(TextExplorer analysis, String fileName) {
-		Path path = Paths.get(properties.getRouteReports() + fileName + ".report");
-		try {
-			Files.writeString(path, analysis.getReport());
-		} catch (IOException | RuntimeException e) {
-			LOG.debug(String.format("Failed to save: %s!", e.getMessage()));
-		}
+		saveString(Paths.get(properties.getRouteReports() + fileName + ".report"), analysis.getReport());
 	}
 
 	@Override
 	public String loadReport(String fileName) {
-		String load = null;
-		try {
-			load = Files.readString(Paths.get(properties.getRouteReports() + fileName + ".report"));
-		} catch (IOException | RuntimeException e) {
-			LOG.debug(String.format("Failed to load: %s!", e.getMessage()));
-		}
-		return load;
+		return loadString(Paths.get(properties.getRouteReports() + fileName + ".report"));
 	}
 
 	@Override
@@ -99,26 +82,7 @@ public class StorageImpl implements Storage {
 		}
 		return dictionary;
 	}
-
-	@Override
-	public Dictionary loadDictionaryFromString(String fileName, Language language) {
-		Path path = Paths.get(properties.getRouteDictionaries() + fileName + ".dictionary");
-		Dictionary dictionary = null;
-		try {
-			String load = Files.readString(path);
-			dictionary = new Dictionary(load, language);
-		} catch (IOException e) {
-			LOG.debug(String.format("Failed to load: %s!", e.getMessage()));
-		}
-		return dictionary;
-	}
-
-	@Override
-	public void saveDictionary(Set<String> dictionaryWords, Language language, String fileName) {
-		Dictionary dictionary = new Dictionary(dictionaryWords, language);
-		saveDictionary(dictionary, fileName);
-	}
-
+	
 	@Override
 	public void saveDictionary(Dictionary dictionary, String fileName) {
 		Path path = Paths.get(properties.getRouteDictionaries() + fileName + ".dictionary");
@@ -127,6 +91,16 @@ public class StorageImpl implements Storage {
 		} catch (IOException e) {
 			LOG.debug(String.format("Failed to save: %s!", e.getMessage()));
 		}
+	}
+
+	@Override
+	public Dictionary loadDictionaryFromString(String fileName, Language language) {
+		return new Dictionary(loadString(Paths.get(properties.getRouteDictionaries() + fileName + ".dictionary")), language);
+	}
+
+	@Override
+	public void saveDictionary(Set<String> dictionaryWords, Language language, String fileName) {
+		saveDictionary(new Dictionary(dictionaryWords, language), fileName);
 	}
 
 	@Override
@@ -175,23 +149,36 @@ public class StorageImpl implements Storage {
 
 	@Override
 	public int loadLastSerialNumber() {
-		Path path = Paths.get(properties.getRouteExplorers() + "lastSerial" + ".number");
 		int last = 0;
 		try {
-			last = Integer.parseInt(Files.readString(path));
-		} catch (IOException | RuntimeException e) {
-			LOG.debug(String.format("Failed to load: %s!", e.getMessage()));
+			last = Integer.parseInt(loadString(Paths.get(properties.getRouteExplorers() + "lastSerial" + ".number")));
+		} catch (RuntimeException e) {
+			LOG.debug(String.format("Failed to read lastSerialNumber: %s!", e.getMessage()));
 		}
 		return last;
 	}
-	
+
 	@Override
 	public void saveLastSerialNumber(int last) {
-		Path path = Paths.get(properties.getRouteExplorers() + "lastSerial" + ".number");
+		saveString(Paths.get(properties.getRouteExplorers() + "lastSerial" + ".number"), "" + last);
+	}
+
+	private String loadString(Path path) {
+		String load = null;
 		try {
-			Files.writeString(path, ""+last);
+			load = Files.readString(path);
+		} catch (IOException | RuntimeException e) {
+			LOG.debug(String.format("Failed to load: %s!", e.getMessage()));
+		}
+		return load;
+	}
+
+	private void saveString(Path path, String string) {
+		try {
+			Files.writeString(path, string);
 		} catch (IOException | RuntimeException e) {
 			LOG.debug(String.format("Failed to save: %s!", e.getMessage()));
 		}
 	}
+
 }
