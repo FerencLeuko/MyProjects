@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.1" class="java.beans.XMLDecoder">
+ <object class="narrative_analyser.analyser.ExplorerBeans">
+  <void property="language">
+   <object class="java.lang.Enum" method="valueOf">
+    <class>narrative_analyser.starter.Language</class>
+    <string>HU</string>
+   </object>
+  </void>
+  <void property="positiveWords">
+   <string>alma,körte</string>
+  </void>
+  <void property="report">
+   <string>&#13;
+Serial number: 7&#13;
+Date: 2020-12-09 08:40&#13;
+Text language: HU&#13;
+Length of the text: 664 chars, 83 words.&#13;
+&#13;
+Frequent words, frequencies, relative frequencies: &#13;
+&#13;
+alma                12       14,5 %&#13;
+almafa              10       12,0 %&#13;
+fa                  10       12,0 %&#13;
+körte               10       12,0 %&#13;
+varjú               10       12,0 %&#13;
+barack               9       10,8 %&#13;
+vas                  8        9,6 %&#13;
+öt                   5        6,0 %&#13;
+kalap                4        4,8 %&#13;
+kalapos              1        1,2 %&#13;
+szilva               1        1,2 %&#13;
+vasbarack            1        1,2 %&#13;
+vaskörte             1        1,2 %&#13;
+vége                 1        1,2 %&#13;
+&#13;
+Positive words (set by user): &#13;
+alma, körte&#13;
+&#13;
+Positive words, frequencies, relative frequencies: &#13;
+&#13;
+alma                12       14,5 %&#13;
+körte               10       12,0 %&#13;
+&#13;
+The results for frequent words in the range of 1, the given key words: &#13;
+&#13;
+Key word: &apos;alma&apos;, frequent words in its range: &#13;
+almafa              10       50,0 %&#13;
+körte                8       40,0 %&#13;
+szilva               1        5,0 %&#13;
+vaskörte             1        5,0 %&#13;
+&#13;
+Key word: &apos;almával&apos;, frequent words in its range: &#13;
+almában              1       50,0 %&#13;
+kalap                1       50,0 %&#13;
+&#13;
+Key word: &apos;bokor&apos;, frequent words in its range: &#13;
+&#13;
+Key word: &apos;fa&apos;, frequent words in its range: &#13;
+barack               9       45,0 %&#13;
+varjú                9       45,0 %&#13;
+varjúval             1        5,0 %&#13;
+vasbarack            1        5,0 %&#13;
+&#13;
+Key word: &apos;kalap&apos;, frequent words in its range: &#13;
+almával              1       50,0 %&#13;
+ötben                1       50,0 %&#13;
+&#13;
+Key word: &apos;vége&apos;, frequent words in its range: &#13;
+vas                  1      100,0 %&#13;
+&#13;
+Key word: &apos;öt&apos;, frequent words in its range: </string>
+  </void>
+  <void property="serialNumber">
+   <int>7</int>
+  </void>
+  <void property="textOriginal">
+   <string>Kalap almával almában öttel ötben öt öttel ötben kalap kalappal kalapos kalapba Almafa alma szilva körtével körte barack fa varjúval vassal körte=2, alma=1, almafa=1, barack=1, fa=1, varjú=1, vas=1 körte=2, alma=1, almafa=1, barack=1, fa=1, varjú=1, vas=1körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, körte=2, alma=1, almafa=1, barack=1, fa=1, varjú=1, vas=1 barack=1, fa=1, varjú=1, vas=1 barack=1, fa=1, varjú=1, vas=1barack=1, fa=1, varjú=1, vas=1 barack=1, fa=1, varjú=1, vas=1 barack=1, fa=1, varjú=1, vas=1 barack=1, fa=1, varjú=1, vas=1 vége</string>
+  </void>
+  <void property="time">
+   <string>2020-12-09 08:40</string>
+  </void>
+ </object>
+</java>

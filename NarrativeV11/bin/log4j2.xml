@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout>
+				<Pattern>%d{ISO8601} %-5p %20c{1} | %m%n</Pattern>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="RollingFile"
+			fileName="Logs/NarrativeV1.log"
+			filePattern="Logs/NarrativeV1-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<Pattern>%d{ISO8601} %-5p %20c{1} | %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy fileIndex="min"
+				max="5">
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<!-- AppenderRef ref="Console" /-->
+			<AppenderRef ref="RollingFile" />
+		</Root>
+	</Loggers>
+</Configuration>

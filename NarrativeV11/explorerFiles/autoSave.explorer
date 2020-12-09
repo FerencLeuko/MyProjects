@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.1" class="java.beans.XMLDecoder">
+ <object class="narrative_analyser.analyser.ExplorerBeans">
+  <void property="language">
+   <object class="java.lang.Enum" method="valueOf">
+    <class>narrative_analyser.starter.Language</class>
+    <string>HU</string>
+   </object>
+  </void>
+  <void property="report">
+   <string>&#13;
+Serial number: 5&#13;
+Date: 2020-12-07 18:00&#13;
+Text language: HU&#13;
+Length of the text: 1 chars, 1 words.&#13;
+&#13;
+Frequent words, frequencies, relative frequencies: &#13;
+&#13;
+a                    1      100,0 %</string>
+  </void>
+  <void property="serialNumber">
+   <int>5</int>
+  </void>
+  <void property="textOriginal">
+   <string>a</string>
+  </void>
+  <void property="time">
+   <string>2020-12-07 18:00</string>
+  </void>
+ </object>
+</java>

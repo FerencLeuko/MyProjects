@@ -1,0 +1,59 @@
+
+Serial number: 7
+Date: 2020-12-09 08:40
+Text language: HU
+Length of the text: 664 chars, 83 words.
+
+Frequent words, frequencies, relative frequencies: 
+
+alma                12       14,5 %
+almafa              10       12,0 %
+fa                  10       12,0 %
+körte               10       12,0 %
+varjú               10       12,0 %
+barack               9       10,8 %
+vas                  8        9,6 %
+öt                   5        6,0 %
+kalap                4        4,8 %
+kalapos              1        1,2 %
+szilva               1        1,2 %
+vasbarack            1        1,2 %
+vaskörte             1        1,2 %
+vége                 1        1,2 %
+
+Positive words (set by user): 
+alma, körte
+
+Positive words, frequencies, relative frequencies: 
+
+alma                12       14,5 %
+körte               10       12,0 %
+
+The results for frequent words in the range of 1, the given key words: 
+
+Key word: 'alma', frequent words in its range: 
+almafa              10       50,0 %
+körte                8       40,0 %
+szilva               1        5,0 %
+vaskörte             1        5,0 %
+
+Key word: 'almával', frequent words in its range: 
+almában              1       50,0 %
+kalap                1       50,0 %
+
+Key word: 'bokor', frequent words in its range: 
+
+Key word: 'fa', frequent words in its range: 
+barack               9       45,0 %
+varjú                9       45,0 %
+varjúval             1        5,0 %
+vasbarack            1        5,0 %
+
+Key word: 'kalap', frequent words in its range: 
+almával              1       50,0 %
+ötben                1       50,0 %
+
+Key word: 'vége', frequent words in its range: 
+vas                  1      100,0 %
+
+Key word: 'öt', frequent words in its range: 
