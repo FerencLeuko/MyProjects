@@ -20,7 +20,7 @@ Role: developer (all coding).
 
 This program is a Five-In-A-Row game application.
 
-## Project No 3. NARRATIVE ANALYSIS SOLUTIONS
+## Project No 3. SALES SUPPORT - NARRATIVE ANALYSIS SOLUTIONS
 
 Tech stack: Java SE. 
 Project time frame: 2018 Sep - Dec 2020. 
