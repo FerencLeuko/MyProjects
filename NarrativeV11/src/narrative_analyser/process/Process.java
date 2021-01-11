@@ -18,8 +18,8 @@ public class Process {
 	Input input = new Input();
 	Storage storage = new StorageImpl();
 	ActionMenu menu = new ActionMenu();
-	Set<Action> actions = new LinkedHashSet<>();
-	Set<String> actionNames = new LinkedHashSet<>();
+	Set<Action> actions;
+	Set<String> actionNames;
 	TextExplorer explorer;
 
 	public Process(TextExplorer explorer) {
@@ -33,12 +33,8 @@ public class Process {
 	}
 
 	private void runMenu() throws ExitException {
-		if (actions.isEmpty()) {
-			initActions();
-		}
-		if (actionNames.isEmpty()) {
-			initActionNames();
-		}
+		initActions();
+		initActionNames();
 		while (true) {
 			storage.autoSave(explorer);
 			LOG.info("Autosave");
@@ -55,12 +51,17 @@ public class Process {
 	}
 
 	private void initActions() {
-		actions.addAll(new Action(explorer).getActionList());
+		if (actions == null) {
+			actions = new LinkedHashSet<>(new Action(explorer).getActionList());
+		}
 	}
 
 	private void initActionNames() {
-		for (Action action : actions) {
-			actionNames.add(action.getName());
+		if (actionNames == null) {
+			actionNames = new LinkedHashSet<>();
+			for (Action action : actions) {
+				actionNames.add(action.getName());
+			}
 		}
 	}
 
